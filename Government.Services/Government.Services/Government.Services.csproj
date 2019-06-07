@@ -101,6 +101,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Government.Data\Government.Data.csproj">
+      <Project>{0eed746e-4f57-4c67-9808-d44e176db5f7}</Project>
+      <Name>Government.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Government.Models\Government.Models.csproj">
+      <Project>{531c9826-0c6d-4fd9-ac47-6bd6056cc268}</Project>
+      <Name>Government.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
