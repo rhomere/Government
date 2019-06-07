@@ -8,6 +8,7 @@ namespace Government.Models
 {
     public class Municipality : Base
     {
-
+        public string MunicipalNumber { get; set; }
+        public string MunicipalName { get; set; }
     }
 }
