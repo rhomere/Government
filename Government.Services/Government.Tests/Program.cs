@@ -16,7 +16,29 @@ namespace Government.Tests
             //GetMunicipalByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
             //GetMunicipalByAddressTest();
 
-            GetOfficialsByMunicipalTest("01");
+            //GetOfficialsByMunicipalTest("01");
+
+            GetFullMinicipalInfoByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
+        }
+
+        private static void GetFullMinicipalInfoByAddressTest(AddressRequest address = null)
+        {
+            var service = new GovernmentService();
+
+            if (address == null) RequestAddress(out address);
+
+            //Get Municipal Info
+            var muni = service.GetMunicipalByAddress(address);
+            if (muni == null) service.DisplayText("Municipal Not Found");
+            service.DisplayText($"Municipal: {muni.MunicipalName}");
+
+            service.DisplayText("Officials");
+            //Get Officials
+            var officials = service.GetOfficialsByMunicipalNumber(muni.MunicipalNumber).OrderBy(o => o.FullName).ToList();
+            officials.ForEach(o => { Console.WriteLine($"{o.Position}: {o.FullName}"); });
+
+
+            Console.ReadLine();
         }
 
         private static void GetOfficialsByMunicipalTest(string number)
