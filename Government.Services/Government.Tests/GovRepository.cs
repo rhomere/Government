@@ -54,5 +54,13 @@ namespace Government.Tests
                 return context.Municipalities.FirstOrDefault(m => m.MunicipalNumber == municipalNumber);
             }
         }
+
+        public List<Official> GetOfficialsByMunicipalNumber(string number)
+        {
+            using (var context = new CityEntities())
+            {
+                return context.Officials.Where(o => o.MunicipalNumber == number).ToList();
+            }
+        }
     }
 }

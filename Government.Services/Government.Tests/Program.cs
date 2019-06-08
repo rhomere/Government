@@ -13,8 +13,21 @@ namespace Government.Tests
         {
             //GeneralTest();
 
-            GetMunicipalByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
+            //GetMunicipalByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
             //GetMunicipalByAddressTest();
+
+            GetOfficialsByMunicipalTest("01");
+        }
+
+        private static void GetOfficialsByMunicipalTest(string number)
+        {
+            var service = new GovernmentService();
+
+            var officials = service.GetOfficialsByMunicipalNumber(number).OrderBy(o => o.FullName).ToList();
+
+            officials.ForEach(o => { Console.WriteLine($"{o.Position}: {o.FullName}"); });
+
+            Console.ReadLine();
         }
 
         private static void GetMunicipalByAddressTest(AddressRequest address = null)
