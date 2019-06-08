@@ -1,9 +1,12 @@
 ﻿using Government.Data;
+using Government.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Address = Government.Data.Address;
+using Official = Government.Data.Official;
 
 namespace Government.Tests
 {
@@ -35,6 +38,20 @@ namespace Government.Tests
             using (var context = new CityEntities())
             {
                 return context.Addresses.ToList();
+            }
+        }
+
+        public Municipal GetMunicipalityByAddress(AddressRequest address)
+        {
+            using(var context = new CityEntities())
+            {
+                var municipalNumber = context.Addresses.FirstOrDefault(a => a.SiteAddress == address.StreetAddress &&
+                                                                    a.SiteCity.Contains(address.City) &&
+                                                                    a.SiteZip.Contains(address.ZipCode)).MunicipalNumber;
+
+                if (municipalNumber == null) throw new Exception("Municipality Not Found");
+
+                return context.Municipalities.FirstOrDefault(m => m.MunicipalNumber == municipalNumber);
             }
         }
     }

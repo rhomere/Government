@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Government.Data;
+using Government.Models;
+using Address = Government.Data.Address;
+using Official = Government.Data.Official;
 
 namespace Government.Tests
 {
@@ -29,6 +32,11 @@ namespace Government.Tests
         public List<Address> GetAddresses()
         {
             return GovRepo.GetAddresses();
+        }
+
+        public Municipal GetMunicipalByAddress(AddressRequest address)
+        {
+            return GovRepo.GetMunicipalityByAddress(address);
         }
 
         public void DisplayText(string text)

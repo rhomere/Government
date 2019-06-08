@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Government.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +11,64 @@ namespace Government.Tests
     {
         static void Main(string[] args)
         {
-            var munis = GovernmentService.GetMunicipalities();
-            var adds = GovernmentService.GetAddresses();
-            var offs = GovernmentService.GetOfficials();
+            //GeneralTest();
 
-            GovernmentService.DisplayText("MUNICIPALITIES");
+            GetMunicipalByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
+            //GetMunicipalByAddressTest();
+        }
+
+        private static void GetMunicipalByAddressTest(AddressRequest address = null)
+        {
+            var service = new GovernmentService();
+
+            if (address == null) RequestAddress(out address);
+
+            var muni = service.GetMunicipalByAddress(address);
+
+            if (muni == null) service.DisplayText("Municipal Not Found");
+
+            service.DisplayText($"Municipal: {muni.MunicipalName}");
+
+            Console.ReadLine();
+        }
+
+        private static void RequestAddress(out AddressRequest address)
+        {
+            Console.Write("Enter StreetAddress 1: ");
+            var s1 = Console.ReadLine().Trim();
+            Console.Write("Enter StreetAddress 2: ");
+            var s2 = Console.ReadLine().Trim();
+            Console.Write("City: ");
+            var city = Console.ReadLine().Trim();
+            Console.Write("Zipcode: ");
+            var zip = Console.ReadLine().Trim();
+
+            address = new AddressRequest { StreetAddress = s1, StreetAddress2 = s2, City = city, ZipCode = zip };
+        }
+
+        private static void GeneralTest()
+        {
+            var service = new GovernmentService();
+
+            var munis = service.GetMunicipalities();
+            var adds = service.GetAddresses();
+            var offs = service.GetOfficials();
+
+            service.DisplayText("MUNICIPALITIES");
 
             foreach (var item in munis)
             {
                 Console.WriteLine($"#{item.MunicipalNumber} Name: {item.MunicipalName}");
             }
 
-            GovernmentService.DisplayText("OFFICIALS");
+            service.DisplayText("OFFICIALS");
 
             foreach (var item in offs)
             {
                 Console.WriteLine($"Position: {item.Position} Name: {item.FullName}");
             }
 
-            GovernmentService.DisplayText("ADDRESSES");
+            service.DisplayText("ADDRESSES");
 
             foreach (var item in adds)
             {

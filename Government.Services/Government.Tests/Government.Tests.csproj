@@ -64,6 +64,10 @@
       <Project>{0eed746e-4f57-4c67-9808-d44e176db5f7}</Project>
       <Name>Government.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Government.Models\Government.Models.csproj">
+      <Project>{531c9826-0c6d-4fd9-ac47-6bd6056cc268}</Project>
+      <Name>Government.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
