@@ -18,7 +18,58 @@ namespace Government.Tests
 
             //GetOfficialsByMunicipalTest("01");
 
-            GetFullMinicipalInfoByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
+            //GetFullMinicipalInfoByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
+
+            MunicipalLookUp("");
+        }
+
+        private static void MunicipalLookUp(string name = null)
+        {
+            var service = new GovernmentService();
+
+            var check = true;
+            var contCheck = true;
+            while (check)
+            {
+                if (string.IsNullOrWhiteSpace(name)) RequestName(out name);
+                GetFullMinicipalInfoByNameTest(name);
+                name = string.Empty;
+                //Exit
+                while (contCheck)
+                {
+                    Console.Write("\nNext Municipality? Y/N: ");
+                    var answer = Console.ReadLine().Trim();
+                    switch (answer.ToUpper())
+                    {
+                        case "Y":
+                            contCheck = false;
+                            break;
+                        case "YES":
+                            contCheck = false;
+                            break;
+                        case "N":
+                            Console.WriteLine("Goodbye");
+                            contCheck = false;
+                            check = false;
+                            break;
+                        case "NO":
+                            Console.WriteLine("Goodbye");
+                            contCheck = false;
+                            check = false;
+                            break;
+                        default:
+                            contCheck = true;
+                            Console.WriteLine();
+                            break;
+                    }
+                }
+            }
+        }
+
+        private static void RequestName(out string name)
+        {
+            Console.Write("\nCity Name? ");
+            name = Console.ReadLine().Trim();
         }
 
         private static void GetFullMinicipalInfoByAddressTest(AddressRequest address = null)
@@ -39,6 +90,25 @@ namespace Government.Tests
 
 
             Console.ReadLine();
+        }
+
+        private static void GetFullMinicipalInfoByNameTest(string name)
+        {
+            var service = new GovernmentService();
+
+            //Get Municipal Info
+            var muni = service.GetMunicipalByName(name);
+            if (muni == null)
+            {
+                service.DisplayText("Municipal Not Found");
+                return;
+            }
+            service.DisplayText($"Municipal: {muni.MunicipalName}");
+
+            service.DisplayText("Officials");
+            //Get Officials
+            var officials = service.GetOfficialsByMunicipalNumber(muni.MunicipalNumber).OrderBy(o => o.Position).ToList();
+            officials.ForEach(o => { Console.WriteLine($"{o.Position}: {o.FullName}"); });
         }
 
         private static void GetOfficialsByMunicipalTest(string number)

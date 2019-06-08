@@ -62,5 +62,13 @@ namespace Government.Tests
                 return context.Officials.Where(o => o.MunicipalNumber == number).ToList();
             }
         }
+
+        public Municipal GetMunicipalByName(string name)
+        {
+            using(var context = new CityEntities())
+            {
+                return context.Municipalities.FirstOrDefault(m => m.MunicipalName.Contains(name));
+            }
+        }
     }
 }

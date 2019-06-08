@@ -44,6 +44,11 @@ namespace Government.Tests
             return GovRepo.GetOfficialsByMunicipalNumber(number);
         }
 
+        public Municipal GetMunicipalByName(string name)
+        {
+            return GovRepo.GetMunicipalByName(name);
+        }
+
         public void DisplayText(string text)
         {
             Console.BackgroundColor = ConsoleColor.Green;
