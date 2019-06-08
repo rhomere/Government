@@ -7,33 +7,31 @@ using Government.Data;
 
 namespace Government.Tests
 {
-    public static class GovernmentService
+    public class GovernmentService
     {
-        public static List<Municipal> GetMunicipalities()
+        public GovRepository GovRepo => new GovRepository();
+
+        public GovernmentService()
         {
-            using (var context = new CityEntities())
-            {
-                return context.Municipalities.ToList();
-            }
+
         }
 
-        public static List<Official> GetOfficials()
+        public List<Municipal> GetMunicipalities()
         {
-            using (var context = new CityEntities())
-            {
-                return context.Officials.ToList();
-            }
+            return GovRepo.GetMunicipalities();
         }
 
-        public static List<Address> GetAddresses()
+        public List<Official> GetOfficials()
         {
-            using (var context = new CityEntities())
-            {
-                return context.Addresses.ToList();
-            }
+            return GovRepo.GetOfficials();
         }
 
-        public static void DisplayText(string text)
+        public List<Address> GetAddresses()
+        {
+            return GovRepo.GetAddresses();
+        }
+
+        public void DisplayText(string text)
         {
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
