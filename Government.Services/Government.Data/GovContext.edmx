@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -31,6 +31,25 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'City.dbo.GovernmentFiles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GovernmentFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MunicipalNumber" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MunicipalNumber" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="datetime2" Precision="7" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'City.dbo.Municipal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -71,6 +90,18 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
         </EntityType>
         <EntityContainer Name="CityModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GovernmentFiles" EntityType="Self.GovernmentFiles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GovernmentFiles].[Id] AS [Id], 
+    [GovernmentFiles].[MunicipalNumber] AS [MunicipalNumber], 
+    [GovernmentFiles].[Name] AS [Name], 
+    [GovernmentFiles].[Description] AS [Description], 
+    [GovernmentFiles].[CreatedDate] AS [CreatedDate], 
+    [GovernmentFiles].[CreatedBy] AS [CreatedBy], 
+    [GovernmentFiles].[ModifiedDate] AS [ModifiedDate], 
+    [GovernmentFiles].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[GovernmentFiles] AS [GovernmentFiles]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Municipal" EntityType="Self.Municipal" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Municipal].[Id] AS [Id], 
@@ -96,8 +127,7 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
     FROM [dbo].[Officials] AS [Officials]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -165,7 +195,25 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Municipals" EntityType="Self.Municipal" />
           <EntitySet Name="Officials" EntityType="Self.Official" />
+          <EntitySet Name="GovernmentFiles" EntityType="CityModel.GovernmentFile" />
         </EntityContainer>
+        <EntityType Name="GovernmentFile">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MunicipalNumber" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MunicipalNumber" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="DateTime" Precision="7" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -225,6 +273,20 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GovernmentFiles">
+            <EntityTypeMapping TypeName="CityModel.GovernmentFile">
+              <MappingFragment StoreEntitySet="GovernmentFiles">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MunicipalNumber" ColumnName="MunicipalNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

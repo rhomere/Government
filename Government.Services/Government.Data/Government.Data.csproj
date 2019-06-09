@@ -138,6 +138,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GovContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GovernmentFile.cs">
+      <DependentUpon>GovContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Municipal.cs">
       <DependentUpon>GovContext.tt</DependentUpon>
     </Compile>

@@ -28,5 +28,6 @@ namespace Government.Data
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Municipal> Municipalities { get; set; }
         public virtual DbSet<Official> Officials { get; set; }
+        public virtual DbSet<GovernmentFile> GovernmentFiles { get; set; }
     }
 }
