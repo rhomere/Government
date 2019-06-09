@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Government.Data;
 using Government.Models;
 using Address = Government.Data.Address;
+using GovernmentFile = Government.Data.GovernmentFile;
 using Official = Government.Data.Official;
 
 namespace Government.Tests
@@ -47,6 +48,11 @@ namespace Government.Tests
         public Municipal GetMunicipalByName(string name)
         {
             return GovRepo.GetMunicipalByName(name);
+        }
+
+        public List<GovernmentFile> GetGovFilesByMunicipalNumber(string number)
+        {
+            return GovRepo.GetGovFilesByMunicipalNumber(number);
         }
 
         public void DisplayText(string text)

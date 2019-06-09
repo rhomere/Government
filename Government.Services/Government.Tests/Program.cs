@@ -20,7 +20,25 @@ namespace Government.Tests
 
             //GetFullMinicipalInfoByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
 
-            MunicipalLookUp("");
+            //MunicipalLookUp("");
+
+
+
+            GetGovFilesByMunicipalNumberTest("");
+        }
+
+        private static void GetGovFilesByMunicipalNumberTest(string number)
+        {
+            if (string.IsNullOrWhiteSpace(number))
+            {
+                Console.WriteLine("Municipal Not Found");
+                return;
+            }
+
+            var service = new GovernmentService();
+            var govFiles = service.GetGovFilesByMunicipalNumber(number);
+
+            govFiles.ForEach(f => { Console.WriteLine($"Name: {f.Name}\n{f.Description}\n\n)"; });
         }
 
         private static void MunicipalLookUp(string name = null)

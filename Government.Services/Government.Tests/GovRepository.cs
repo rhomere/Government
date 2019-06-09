@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Address = Government.Data.Address;
+using GovernmentFile = Government.Data.GovernmentFile;
 using Official = Government.Data.Official;
 
 namespace Government.Tests
@@ -68,6 +69,14 @@ namespace Government.Tests
             using(var context = new CityEntities())
             {
                 return context.Municipalities.FirstOrDefault(m => m.MunicipalName.Contains(name));
+            }
+        }
+
+        public List<GovernmentFile> GetGovFilesByMunicipalNumber(string number)
+        {
+            using(var context = new CityEntities())
+            {
+                return context.GovernmentFiles.Where(f => f.MunicipalNumber == number).ToList();
             }
         }
     }
