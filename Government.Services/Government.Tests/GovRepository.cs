@@ -56,6 +56,18 @@ namespace Government.Tests
             }
         }
 
+        public Municipal GetMunicipalityByOfficialId(int id)
+        {
+            using (var context = new CityEntities())
+            {
+                var official = context.Officials.FirstOrDefault(o => o.Id == id);
+
+                if (official == null) throw new Exception ("Official Not Found");
+
+                return context.Municipalities.First(m => m.MunicipalNumber == official.MunicipalNumber);
+            }
+        }
+
         public List<Official> GetOfficialsByMunicipalNumber(string number)
         {
             using (var context = new CityEntities())
@@ -77,6 +89,14 @@ namespace Government.Tests
             using(var context = new CityEntities())
             {
                 return context.GovernmentFiles.Where(f => f.MunicipalNumber == number).ToList();
+            }
+        }
+
+        public List<OfficialXGovFile> GetOffXGovFileByOfficialId(int id)
+        {
+            using (var context = new CityEntities())
+            {
+                return context.OfficialXGovFiles.Where(f => f.OfficialId == id).ToList();
             }
         }
 

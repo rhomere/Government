@@ -20,11 +20,11 @@ namespace Government.Tests
 
             //GetFullMinicipalInfoByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
 
-            //MunicipalLookUp("");
+            MunicipalLookUp("");
 
             //AddTestGovFiles();
 
-            AddTestOfficialXGovFiles();
+            //AddTestOfficialXGovFiles();
 
             //GetGovFilesByMunicipalNumberTest("");
         }
@@ -185,6 +185,11 @@ namespace Government.Tests
             //Get Officials
             var officials = service.GetOfficialsByMunicipalNumber(muni.MunicipalNumber).OrderBy(o => o.Position).ToList();
             officials.ForEach(o => { Console.WriteLine($"{o.Position}: {o.FullName}"); });
+
+            service.DisplayText("Government Files");
+            //Get GovernmentFiles 
+            var files = service.GetGovFilesByMunicipalNumber(muni.MunicipalNumber);
+            files.ForEach(f => { Console.WriteLine($"{f.Name}, {f.Description}"); });
         }
 
         private static void GetOfficialsByMunicipalTest(string number)
