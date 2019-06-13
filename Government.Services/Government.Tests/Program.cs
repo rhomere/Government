@@ -22,9 +22,28 @@ namespace Government.Tests
 
             //MunicipalLookUp("");
 
-            AddTestGovFiles();
+            //AddTestGovFiles();
+
+            AddTestOfficialXGovFiles();
 
             //GetGovFilesByMunicipalNumberTest("");
+        }
+
+        private static void AddTestOfficialXGovFiles()
+        {
+            var list = new List<Data.OfficialXGovFile>
+            {
+                new Data.OfficialXGovFile { OfficialId = 1, GovernmentFileId = 1, CreatedBy = "rhomere" },
+                new Data.OfficialXGovFile { OfficialId = 2, GovernmentFileId = 1, CreatedBy = "rhomere" },
+                new Data.OfficialXGovFile { OfficialId = 3, GovernmentFileId = 1, CreatedBy = "rhomere" },
+                new Data.OfficialXGovFile { OfficialId = 4, GovernmentFileId = 1, CreatedBy = "rhomere" },
+                new Data.OfficialXGovFile { OfficialId = 5, GovernmentFileId = 1, CreatedBy = "rhomere" },
+                new Data.OfficialXGovFile { OfficialId = 5, GovernmentFileId = 1, CreatedBy = "rhomere" }
+            };
+
+            var service = new GovernmentService();
+
+            service.AddOfficialXGovFilesTest(list);
         }
 
         private static void AddTestGovFiles()

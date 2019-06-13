@@ -60,6 +60,11 @@ namespace Government.Tests
             GovRepo.AddGovFilesTest(files);
         }
 
+        public void AddOfficialXGovFilesTest(List<OfficialXGovFile> files)
+        {
+            GovRepo.AddOfficialXGovFilesTest(files);
+        }
+
         public void DisplayText(string text)
         {
             Console.BackgroundColor = ConsoleColor.Green;

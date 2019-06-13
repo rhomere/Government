@@ -91,5 +91,17 @@ namespace Government.Tests
                 }
             });
         }
+
+        public void AddOfficialXGovFilesTest(List<OfficialXGovFile> files)
+        {
+            files.ForEach(f =>
+            {
+                using (var context = new CityEntities())
+                {
+                    context.OfficialXGovFiles.Add(f);
+                    context.SaveChanges();
+                }
+            });
+        }
     }
 }
