@@ -147,6 +147,9 @@
     <Compile Include="Official.cs">
       <DependentUpon>GovContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="OfficialXGovFile.cs">
+      <DependentUpon>GovContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

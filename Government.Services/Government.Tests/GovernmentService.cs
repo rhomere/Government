@@ -55,6 +55,11 @@ namespace Government.Tests
             return GovRepo.GetGovFilesByMunicipalNumber(number);
         }
 
+        public void AddGovFilesTest(List<GovernmentFile> files)
+        {
+            GovRepo.AddGovFilesTest(files);
+        }
+
         public void DisplayText(string text)
         {
             Console.BackgroundColor = ConsoleColor.Green;

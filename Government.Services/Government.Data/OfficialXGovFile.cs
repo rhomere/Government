@@ -12,12 +12,14 @@ namespace Government.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class GovernmentFile
+    public partial class OfficialXGovFile
     {
         public int Id { get; set; }
-        public string MunicipalNumber { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int OfficialId { get; set; }
+        public int GovernmentFileId { get; set; }
+        public Nullable<bool> Sponsored { get; set; }
+        public Nullable<bool> CoSponsored { get; set; }
+        public string Vote { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }

@@ -32,33 +32,22 @@
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'City.dbo.GovernmentFiles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GovernmentFiles">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="MunicipalNumber" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="CreatedDate" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MunicipalNumber" Type="varchar" MaxLength="4" Nullable="false" />
-          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="MunicipalNumber" Type="varchar" MaxLength="4" />
+          <Property Name="Name" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="CreatedBy" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
-          <Property Name="ModifiedBy" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'City.dbo.Municipal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Municipal">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="MunicipalNumber" />
-            <PropertyRef Name="MunicipalName" />
-            <PropertyRef Name="CreatedDate" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MunicipalNumber" Type="varchar" MaxLength="4" Nullable="false" />
@@ -68,15 +57,9 @@ warning 6002: The table/view 'City.dbo.Municipal' does not have a primary key de
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'City.dbo.Officials' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Officials">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="MunicipalNumber" />
-            <PropertyRef Name="Position" />
-            <PropertyRef Name="FullName" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MunicipalNumber" Type="varchar" MaxLength="4" Nullable="false" />
@@ -88,44 +71,27 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="OfficialXGovFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfficialId" Type="int" Nullable="false" />
+          <Property Name="GovernmentFileId" Type="int" Nullable="false" />
+          <Property Name="Sponsored" Type="bit" />
+          <Property Name="CoSponsored" Type="bit" />
+          <Property Name="Vote" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="CityModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GovernmentFiles" EntityType="Self.GovernmentFiles" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [GovernmentFiles].[Id] AS [Id], 
-    [GovernmentFiles].[MunicipalNumber] AS [MunicipalNumber], 
-    [GovernmentFiles].[Name] AS [Name], 
-    [GovernmentFiles].[Description] AS [Description], 
-    [GovernmentFiles].[CreatedDate] AS [CreatedDate], 
-    [GovernmentFiles].[CreatedBy] AS [CreatedBy], 
-    [GovernmentFiles].[ModifiedDate] AS [ModifiedDate], 
-    [GovernmentFiles].[ModifiedBy] AS [ModifiedBy]
-    FROM [dbo].[GovernmentFiles] AS [GovernmentFiles]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Municipal" EntityType="Self.Municipal" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Municipal].[Id] AS [Id], 
-    [Municipal].[MunicipalNumber] AS [MunicipalNumber], 
-    [Municipal].[MunicipalName] AS [MunicipalName], 
-    [Municipal].[ModifiedDate] AS [ModifiedDate], 
-    [Municipal].[ModifiedBy] AS [ModifiedBy], 
-    [Municipal].[CreatedBy] AS [CreatedBy], 
-    [Municipal].[CreatedDate] AS [CreatedDate]
-    FROM [dbo].[Municipal] AS [Municipal]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Officials" EntityType="Self.Officials" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Officials].[Id] AS [Id], 
-    [Officials].[MunicipalNumber] AS [MunicipalNumber], 
-    [Officials].[Position] AS [Position], 
-    [Officials].[FullName] AS [FullName], 
-    [Officials].[District] AS [District], 
-    [Officials].[CreatedDate] AS [CreatedDate], 
-    [Officials].[CreatedBy] AS [CreatedBy], 
-    [Officials].[ModifiedDate] AS [ModifiedDate], 
-    [Officials].[ModifiedBy] AS [ModifiedBy]
-    FROM [dbo].[Officials] AS [Officials]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="GovernmentFiles" EntityType="Self.GovernmentFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipal" EntityType="Self.Municipal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Officials" EntityType="Self.Officials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficialXGovFile" EntityType="Self.OfficialXGovFile" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -161,9 +127,6 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
         <EntityType Name="Municipal">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="MunicipalNumber" />
-            <PropertyRef Name="MunicipalName" />
-            <PropertyRef Name="CreatedDate" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MunicipalNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
@@ -176,10 +139,6 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
         <EntityType Name="Official">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="MunicipalNumber" />
-            <PropertyRef Name="Position" />
-            <PropertyRef Name="FullName" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MunicipalNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
@@ -195,24 +154,36 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Municipals" EntityType="Self.Municipal" />
           <EntitySet Name="Officials" EntityType="Self.Official" />
+          <EntitySet Name="OfficialXGovFiles" EntityType="CityModel.OfficialXGovFile" />
           <EntitySet Name="GovernmentFiles" EntityType="CityModel.GovernmentFile" />
         </EntityContainer>
+        <EntityType Name="OfficialXGovFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficialId" Type="Int32" Nullable="false" />
+          <Property Name="GovernmentFileId" Type="Int32" Nullable="false" />
+          <Property Name="Sponsored" Type="Boolean" />
+          <Property Name="CoSponsored" Type="Boolean" />
+          <Property Name="Vote" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="GovernmentFile">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="MunicipalNumber" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="CreatedDate" />
-            <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MunicipalNumber" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MunicipalNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
-          <Property Name="ModifiedBy" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -273,6 +244,22 @@ warning 6002: The table/view 'City.dbo.Officials' does not have a primary key de
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficialXGovFiles">
+            <EntityTypeMapping TypeName="CityModel.OfficialXGovFile">
+              <MappingFragment StoreEntitySet="OfficialXGovFile">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Vote" ColumnName="Vote" />
+                <ScalarProperty Name="CoSponsored" ColumnName="CoSponsored" />
+                <ScalarProperty Name="Sponsored" ColumnName="Sponsored" />
+                <ScalarProperty Name="GovernmentFileId" ColumnName="GovernmentFileId" />
+                <ScalarProperty Name="OfficialId" ColumnName="OfficialId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

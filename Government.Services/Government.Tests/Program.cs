@@ -22,9 +22,48 @@ namespace Government.Tests
 
             //MunicipalLookUp("");
 
+            AddTestGovFiles();
 
+            //GetGovFilesByMunicipalNumberTest("");
+        }
 
-            GetGovFilesByMunicipalNumberTest("");
+        private static void AddTestGovFiles()
+        {
+            var list = new List<Data.GovernmentFile>
+            {
+                new Data.GovernmentFile { MunicipalNumber = "01", Name = "File 1", Description = "File 1 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "01", Name = "File 2", Description = "File 2 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "02", Name = "File 3", Description = "File 3 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "02", Name = "File 4", Description = "File 4 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "03", Name = "File 5", Description = "File 5 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "03", Name = "File 6", Description = "File 6 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "04", Name = "File 7", Description = "File 7 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "04", Name = "File 8", Description = "File 8 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "05", Name = "File 9", Description = "File 9 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "05", Name = "File 10", Description = "File 10 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "06", Name = "File 11", Description = "File 11 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "06", Name = "File 12", Description = "File 12 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "07", Name = "File 13", Description = "File 13 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "07", Name = "File 14", Description = "File 14 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "08", Name = "File 15", Description = "File 15 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "08", Name = "File 16", Description = "File 16 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "09", Name = "File 17", Description = "File 17 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "09", Name = "File 18", Description = "File 18 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "10", Name = "File 19", Description = "File 19 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "10", Name = "File 20", Description = "File 20 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "11", Name = "File 21", Description = "File 21 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "11", Name = "File 22", Description = "File 22 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "12", Name = "File 23", Description = "File 23 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "12", Name = "File 24", Description = "File 24 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "13", Name = "File 25", Description = "File 25 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "13", Name = "File 26", Description = "File 26 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "14", Name = "File 27", Description = "File 27 Description", CreatedBy = "rhomere" },
+                new Data.GovernmentFile { MunicipalNumber = "14", Name = "File 28", Description = "File 28 Description", CreatedBy = "rhomere" }
+            };
+
+            var service = new GovernmentService();
+
+            service.AddGovFilesTest(list);
         }
 
         private static void GetGovFilesByMunicipalNumberTest(string number)
@@ -38,7 +77,7 @@ namespace Government.Tests
             var service = new GovernmentService();
             var govFiles = service.GetGovFilesByMunicipalNumber(number);
 
-            govFiles.ForEach(f => { Console.WriteLine($"Name: {f.Name}\n{f.Description}\n\n)"; });
+            govFiles.ForEach(f => { Console.WriteLine($"Name: {f.Name}\n{f.Description}\n\n)"); });
         }
 
         private static void MunicipalLookUp(string name = null)

@@ -79,5 +79,17 @@ namespace Government.Tests
                 return context.GovernmentFiles.Where(f => f.MunicipalNumber == number).ToList();
             }
         }
+
+        public void AddGovFilesTest(List<GovernmentFile> files)
+        {
+            files.ForEach(f =>
+            {
+                using (var context = new CityEntities())
+                {
+                    context.GovernmentFiles.Add(f);
+                    context.SaveChanges();
+                }
+            });
+        }
     }
 }
