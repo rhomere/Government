@@ -107,6 +107,8 @@ namespace Government.Tests
             while (check)
             {
                 if (string.IsNullOrWhiteSpace(name)) RequestName(out name);
+                Console.WriteLine("Processing...");
+                
                 GetFullMinicipalInfoByNameTest(name);
                 name = string.Empty;
                 //Exit
@@ -179,6 +181,9 @@ namespace Government.Tests
                 service.DisplayText("Municipal Not Found");
                 return;
             }
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+            Console.WriteLine("              ");
+
             service.DisplayText($"Municipal: {muni.MunicipalName}");
 
             service.DisplayText("Officials");
