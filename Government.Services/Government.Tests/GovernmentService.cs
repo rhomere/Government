@@ -79,5 +79,13 @@ namespace Government.Tests
             Console.WriteLine($"\n{text}\n");
             Console.ResetColor();
         }
+
+        public void DisplayTextWithoutBreaklines(string text)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine($"{text}");
+            Console.ResetColor();
+        }
     }
 }

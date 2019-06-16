@@ -110,27 +110,32 @@ namespace Government.Tests
                 Console.WriteLine("Processing...");
                 
                 GetFullMinicipalInfoByNameTest(name);
-                name = string.Empty;
                 //Exit
                 var contCheck = true;
                 while (contCheck)
                 {
-                    Console.Write("\nNext Municipality? Y/N: ");
+                    service.DisplayText("Menu");
+                    Console.WriteLine("1) GovernmentFiles");
+                    Console.WriteLine("2) GovernmentFiles By Official");
+                    Console.WriteLine("3) Another Municipality");
+                    Console.WriteLine("4) Exit");
+                    Console.WriteLine();
                     var answer = Console.ReadLine().Trim();
-                    switch (answer.ToUpper())
+                    
+                    switch (answer)
                     {
-                        case "Y":
+                        case "1":
+                            contCheck = false;
+                            GetGovernmentFiles(name);
+                            break;
+                        case "2":
+                            contCheck = false;
+                            GetOfficial(name);
+                            break;
+                        case "3":
                             contCheck = false;
                             break;
-                        case "YES":
-                            contCheck = false;
-                            break;
-                        case "N":
-                            Console.WriteLine("Goodbye");
-                            contCheck = false;
-                            check = false;
-                            break;
-                        case "NO":
+                        case "4":
                             Console.WriteLine("Goodbye");
                             contCheck = false;
                             check = false;
@@ -140,8 +145,75 @@ namespace Government.Tests
                             Console.WriteLine();
                             break;
                     }
+                    name = string.Empty;
+                    answer = string.Empty;
                 }
             }
+        }
+
+        private static void GetGovernmentFiles(string name)
+        {
+            var service = new GovernmentService();
+            var muni = service.GetMunicipalByName(name);
+            var files = service.GetGovFilesByMunicipalNumber(muni.MunicipalNumber);
+
+            service.DisplayText("GovernmentFiles");
+
+            foreach (var file in files)
+            {
+                Console.WriteLine($"{file.Name} {file.Description}");
+            }
+            Console.WriteLine();
+        }
+
+        private static void GetOfficial(string name)
+        {
+            var service = new GovernmentService();
+            var result = 0;
+            var check = true;
+            var initial = true;
+            //Get Municipal Info
+            var muni = service.GetMunicipalByName(name);
+            var officials = service.GetOfficialsByMunicipalNumber(muni.MunicipalNumber);
+
+            while (check)
+            {
+                if (initial)
+                {
+                    service.DisplayText("Choose an official");
+                    for (int i = 0; i < officials.Count(); i++)
+                    {
+                        Console.WriteLine($"{i+1}) {officials[i].Position} {officials[i].FullName}");
+                    }
+                    Console.WriteLine();
+                    initial = false;
+                }
+                else
+                {
+                    Console.Write("Choose an official: ");
+                }
+                
+                var answer = Console.ReadLine().Trim();
+
+                if (int.TryParse(answer, out result) && result <= officials.Count() - 1)
+                {
+                    check = false;
+                    GovernmentFilesByOfficial(service, officials[result].Id);
+                }
+            }
+            
+            
+        }
+
+        private static void GovernmentFilesByOfficial(GovernmentService service, int id)
+        {
+            service.DisplayText("Government Files");
+            var files = service.GetGovernmentFilesByOfficialId(id);
+            foreach (var file in files)
+            {
+                Console.WriteLine($"{file.Name} {file.Description}");
+            }
+            Console.WriteLine();
         }
 
         private static void RequestName(out string name)
@@ -191,10 +263,10 @@ namespace Government.Tests
             var officials = service.GetOfficialsByMunicipalNumber(muni.MunicipalNumber).OrderBy(o => o.Position).ToList();
             officials.ForEach(o => { Console.WriteLine($"{o.Position}: {o.FullName}"); });
 
-            service.DisplayText("Government Files");
             //Get GovernmentFiles 
-            var files = service.GetGovFilesByMunicipalNumber(muni.MunicipalNumber);
-            files.ForEach(f => { Console.WriteLine($"{f.Name}, {f.Description}"); });
+            //service.DisplayText("Government Files");
+            //var files = service.GetGovFilesByMunicipalNumber(muni.MunicipalNumber);
+            //files.ForEach(f => { Console.WriteLine($"{f.Name}, {f.Description}"); });
         }
 
         private static void GetOfficialsByMunicipalTest(string number)
