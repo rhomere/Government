@@ -24,5 +24,6 @@ namespace Government.Data
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public bool ISDELETED { get; set; }
     }
 }

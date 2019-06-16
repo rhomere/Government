@@ -85,6 +85,7 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ISDELETED" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="CityModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
@@ -154,9 +155,22 @@
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Municipals" EntityType="Self.Municipal" />
           <EntitySet Name="Officials" EntityType="Self.Official" />
-          <EntitySet Name="OfficialXGovFiles" EntityType="CityModel.OfficialXGovFile" />
           <EntitySet Name="GovernmentFiles" EntityType="CityModel.GovernmentFile" />
+          <EntitySet Name="OfficialXGovFiles" EntityType="CityModel.OfficialXGovFile" />
         </EntityContainer>
+        <EntityType Name="GovernmentFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MunicipalNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="OfficialXGovFile">
           <Key>
             <PropertyRef Name="Id" />
@@ -171,19 +185,7 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="GovernmentFile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MunicipalNumber" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISDELETED" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -247,22 +249,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OfficialXGovFiles">
-            <EntityTypeMapping TypeName="CityModel.OfficialXGovFile">
-              <MappingFragment StoreEntitySet="OfficialXGovFile">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Vote" ColumnName="Vote" />
-                <ScalarProperty Name="CoSponsored" ColumnName="CoSponsored" />
-                <ScalarProperty Name="Sponsored" ColumnName="Sponsored" />
-                <ScalarProperty Name="GovernmentFileId" ColumnName="GovernmentFileId" />
-                <ScalarProperty Name="OfficialId" ColumnName="OfficialId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GovernmentFiles">
             <EntityTypeMapping TypeName="CityModel.GovernmentFile">
               <MappingFragment StoreEntitySet="GovernmentFiles">
@@ -273,6 +259,23 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MunicipalNumber" ColumnName="MunicipalNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficialXGovFiles">
+            <EntityTypeMapping TypeName="CityModel.OfficialXGovFile">
+              <MappingFragment StoreEntitySet="OfficialXGovFile">
+                <ScalarProperty Name="ISDELETED" ColumnName="ISDELETED" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Vote" ColumnName="Vote" />
+                <ScalarProperty Name="CoSponsored" ColumnName="CoSponsored" />
+                <ScalarProperty Name="Sponsored" ColumnName="Sponsored" />
+                <ScalarProperty Name="GovernmentFileId" ColumnName="GovernmentFileId" />
+                <ScalarProperty Name="OfficialId" ColumnName="OfficialId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

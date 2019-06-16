@@ -57,9 +57,7 @@ namespace Government.Tests
 
         public List<GovernmentFile> GetGovernmentFilesByOfficialId(int id)
         {
-            var result = new List<GovernmentFile>();
-            var muniNum = GovRepo.GetMunicipalityByOfficialId(id).MunicipalNumber;
-            return GovRepo.GetGovFilesByMunicipalNumber(muniNum);
+            return GovRepo.GetGovernmentFilesByOfficialId(id);
         }
 
         public void AddGovFilesTest(List<GovernmentFile> files)

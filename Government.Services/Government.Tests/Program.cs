@@ -106,12 +106,12 @@ namespace Government.Tests
             var check = true;
             while (check)
             {
-                if (string.IsNullOrWhiteSpace(name)) RequestName(out name);
+                if (string.IsNullOrWhiteSpace(name)) RequestName(service, out name);
                 Console.WriteLine("Processing...");
-                
                 GetFullMinicipalInfoByNameTest(name);
-                //Exit
-                var contCheck = true;
+
+                 //Exit
+                 var contCheck = true;
                 while (contCheck)
                 {
                     service.DisplayText("Menu");
@@ -198,7 +198,7 @@ namespace Government.Tests
                 if (int.TryParse(answer, out result) && result <= officials.Count() - 1)
                 {
                     check = false;
-                    GovernmentFilesByOfficial(service, officials[result].Id);
+                    GovernmentFilesByOfficial(service, officials[result-1].Id);
                 }
             }
             
@@ -216,10 +216,21 @@ namespace Government.Tests
             Console.WriteLine();
         }
 
-        private static void RequestName(out string name)
+        private static void RequestName(GovernmentService service, out string name)
         {
-            Console.Write("\nCity Name? ");
-            name = Console.ReadLine().Trim();
+            var check = true;
+            name = string.Empty;
+
+            while (check)
+            {
+                Console.Write("\nCity Name? ");
+                name = Console.ReadLine().Trim();
+                var muni = service.GetMunicipalByName(name);
+                if (muni != null)
+                {
+                    check = false;
+                }
+            }
         }
 
         private static void GetFullMinicipalInfoByAddressTest(AddressRequest address = null)
@@ -242,7 +253,7 @@ namespace Government.Tests
             Console.ReadLine();
         }
 
-        private static void GetFullMinicipalInfoByNameTest(string name)
+        private static bool GetFullMinicipalInfoByNameTest(string name)
         {
             var service = new GovernmentService();
 
@@ -251,7 +262,7 @@ namespace Government.Tests
             if (muni == null)
             {
                 service.DisplayText("Municipal Not Found");
-                return;
+                return false;
             }
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
             Console.WriteLine("              ");
@@ -267,6 +278,7 @@ namespace Government.Tests
             //service.DisplayText("Government Files");
             //var files = service.GetGovFilesByMunicipalNumber(muni.MunicipalNumber);
             //files.ForEach(f => { Console.WriteLine($"{f.Name}, {f.Description}"); });
+            return true;
         }
 
         private static void GetOfficialsByMunicipalTest(string number)

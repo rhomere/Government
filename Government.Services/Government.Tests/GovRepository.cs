@@ -100,6 +100,17 @@ namespace Government.Tests
             }
         }
 
+        public List<GovernmentFile> GetGovernmentFilesByOfficialId(int id)
+        {
+            var list = new List<GovernmentFile>();
+            using (var context = new CityEntities())
+            {
+                var offXGovFiles = context.OfficialXGovFiles.Where(f => f.OfficialId == id && f.ISDELETED == false).Select(f => f.GovernmentFileId).ToList();
+                list.AddRange(context.GovernmentFiles.Where(g => offXGovFiles.Contains(g.Id)).ToList());
+                return list;
+            }
+        }
+
         public void AddGovFilesTest(List<GovernmentFile> files)
         {
             files.ForEach(f =>
