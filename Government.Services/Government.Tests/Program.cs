@@ -104,13 +104,13 @@ namespace Government.Tests
             var service = new GovernmentService();
 
             var check = true;
-            var contCheck = true;
             while (check)
             {
                 if (string.IsNullOrWhiteSpace(name)) RequestName(out name);
                 GetFullMinicipalInfoByNameTest(name);
                 name = string.Empty;
                 //Exit
+                var contCheck = true;
                 while (contCheck)
                 {
                     Console.Write("\nNext Municipality? Y/N: ");
