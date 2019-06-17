@@ -157,12 +157,16 @@ namespace Government.Tests
             var muni = service.GetMunicipalByName(name);
             var files = service.GetGovFilesByMunicipalNumber(muni.MunicipalNumber);
 
-            service.DisplayText("GovernmentFiles");
-
-            foreach (var file in files)
+            if (files.Count() == 0)
             {
-                Console.WriteLine($"{file.Name} {file.Description}");
+                Console.WriteLine("Files Not Found");
             }
+            else
+            {
+                service.DisplayText("GovernmentFiles");
+                files.ForEach(f => { Console.WriteLine($"{f.Name} {f.Description}"); });
+            }
+
             Console.WriteLine();
         }
 
