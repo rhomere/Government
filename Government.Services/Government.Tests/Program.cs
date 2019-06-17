@@ -209,10 +209,16 @@ namespace Government.Tests
         {
             service.DisplayText("Government Files");
             var files = service.GetGovernmentFilesByOfficialId(id);
-            foreach (var file in files)
+
+            if (files.Count() == 0)
             {
-                Console.WriteLine($"{file.Name} {file.Description}");
+                Console.WriteLine("Files Not Found");
             }
+            else
+            {
+                files.ForEach(f => { Console.WriteLine($"{f.Name} {f.Description}"); });
+            }
+            
             Console.WriteLine();
         }
 
