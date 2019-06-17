@@ -165,7 +165,13 @@ namespace Government.Tests
             }
             else
             {
-                files.ForEach(f => { Console.WriteLine($"{f.Name} {f.Description}"); });
+                var index = 1;
+
+                files.ForEach(f => 
+                {
+                    Console.WriteLine($"{index}) {f.Name} {f.Description}");
+                    index++;
+                });
             }
 
             Console.WriteLine();
@@ -218,13 +224,17 @@ namespace Government.Tests
             if (files.Count() == 0)
             {
                 Console.WriteLine("Files Not Found");
+                return;
             }
             else
             {
-                files.ForEach(f => { Console.WriteLine($"{f.Name} {f.Description}"); });
+                var index = 1;
+                files.ForEach(f => 
+                {
+                    Console.WriteLine($"{index}) {f.Name} {f.Description}");
+                    index++;
+                });
             }
-            
-            Console.WriteLine();
         }
 
         private static void RequestName(GovernmentService service, out string name)
