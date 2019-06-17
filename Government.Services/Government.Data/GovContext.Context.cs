@@ -30,5 +30,7 @@ namespace Government.Data
         public virtual DbSet<Official> Officials { get; set; }
         public virtual DbSet<GovernmentFile> GovernmentFiles { get; set; }
         public virtual DbSet<OfficialXGovFile> OfficialXGovFiles { get; set; }
+        public virtual DbSet<OfficialInfoXCity> OfficialInfoXCities { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
     }
 }

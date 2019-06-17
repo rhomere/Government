@@ -57,6 +57,22 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="OfficialInfoXCity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionId" Type="int" Nullable="false" />
+          <Property Name="MunicipalId" Type="int" Nullable="false" />
+          <Property Name="TermLength" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="JobDescription" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="JobRequirement" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="25" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Officials">
           <Key>
             <PropertyRef Name="Id" />
@@ -87,12 +103,26 @@
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="ISDELETED" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="datetime2" Precision="7" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="CityModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GovernmentFiles" EntityType="Self.GovernmentFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Municipal" EntityType="Self.Municipal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficialInfoXCity" EntityType="Self.OfficialInfoXCity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Officials" EntityType="Self.Officials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OfficialXGovFile" EntityType="Self.OfficialXGovFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -157,6 +187,8 @@
           <EntitySet Name="Officials" EntityType="Self.Official" />
           <EntitySet Name="GovernmentFiles" EntityType="CityModel.GovernmentFile" />
           <EntitySet Name="OfficialXGovFiles" EntityType="CityModel.OfficialXGovFile" />
+          <EntitySet Name="OfficialInfoXCities" EntityType="CityModel.OfficialInfoXCity" />
+          <EntitySet Name="Positions" EntityType="CityModel.Position" />
         </EntityContainer>
         <EntityType Name="GovernmentFile">
           <Key>
@@ -186,6 +218,34 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ISDELETED" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfficialInfoXCity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionId" Type="Int32" Nullable="false" />
+          <Property Name="MunicipalId" Type="Int32" Nullable="false" />
+          <Property Name="TermLength" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="JobDescription" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="JobRequirement" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="DateTime" Precision="7" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -276,6 +336,36 @@
                 <ScalarProperty Name="Sponsored" ColumnName="Sponsored" />
                 <ScalarProperty Name="GovernmentFileId" ColumnName="GovernmentFileId" />
                 <ScalarProperty Name="OfficialId" ColumnName="OfficialId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficialInfoXCities">
+            <EntityTypeMapping TypeName="CityModel.OfficialInfoXCity">
+              <MappingFragment StoreEntitySet="OfficialInfoXCity">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="JobRequirement" ColumnName="JobRequirement" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="TermLength" ColumnName="TermLength" />
+                <ScalarProperty Name="MunicipalId" ColumnName="MunicipalId" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="CityModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
