@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="CityModel.OfficialXGovFile" Width="1.5" PointX="3.375" PointY="4.75" />
         <EntityTypeShape EntityType="CityModel.OfficialInfoXCity" Width="1.5" PointX="5.375" PointY="4.75" />
         <EntityTypeShape EntityType="CityModel.Position" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CityModel.GovernmentFile" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

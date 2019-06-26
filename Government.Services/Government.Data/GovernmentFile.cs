@@ -22,5 +22,15 @@ namespace Government.Data
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
+        public string RequestingDepartment { get; set; }
+        public System.DateTime Date { get; set; }
+        public Nullable<System.DateTime> CommissionMeetingDate { get; set; }
+        public string PurposeOfItem { get; set; }
+        public string BackgroundItem { get; set; }
+        public string BudgetImpactAnalysis { get; set; }
+        public string TotalFiscalImpact { get; set; }
+        public string FileId { get; set; }
+        public string Subject { get; set; }
+        public string Type { get; set; }
     }
 }
