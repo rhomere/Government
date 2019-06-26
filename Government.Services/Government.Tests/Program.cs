@@ -20,9 +20,9 @@ namespace Government.Tests
 
             //GetFullMinicipalInfoByAddressTest(new AddressRequest { StreetAddress = "1040 NW 5 AVE", StreetAddress2 = "", City = "Miami", ZipCode = "33136" });
 
-            MunicipalLookUp("");
+            //MunicipalLookUp("");
 
-            //AddTestGovFiles();
+            AddTestGovFiles();
 
             //AddTestOfficialXGovFiles();
 
@@ -50,34 +50,28 @@ namespace Government.Tests
         {
             var list = new List<Data.GovernmentFile>
             {
-                new Data.GovernmentFile { MunicipalNumber = "01", Name = "File 1", Description = "File 1 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "01", Name = "File 2", Description = "File 2 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "02", Name = "File 3", Description = "File 3 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "02", Name = "File 4", Description = "File 4 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "03", Name = "File 5", Description = "File 5 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "03", Name = "File 6", Description = "File 6 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "04", Name = "File 7", Description = "File 7 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "04", Name = "File 8", Description = "File 8 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "05", Name = "File 9", Description = "File 9 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "05", Name = "File 10", Description = "File 10 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "06", Name = "File 11", Description = "File 11 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "06", Name = "File 12", Description = "File 12 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "07", Name = "File 13", Description = "File 13 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "07", Name = "File 14", Description = "File 14 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "08", Name = "File 15", Description = "File 15 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "08", Name = "File 16", Description = "File 16 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "09", Name = "File 17", Description = "File 17 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "09", Name = "File 18", Description = "File 18 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "10", Name = "File 19", Description = "File 19 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "10", Name = "File 20", Description = "File 20 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "11", Name = "File 21", Description = "File 21 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "11", Name = "File 22", Description = "File 22 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "12", Name = "File 23", Description = "File 23 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "12", Name = "File 24", Description = "File 24 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "13", Name = "File 25", Description = "File 25 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "13", Name = "File 26", Description = "File 26 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "14", Name = "File 27", Description = "File 27 Description", CreatedBy = "rhomere" },
-                new Data.GovernmentFile { MunicipalNumber = "14", Name = "File 28", Description = "File 28 Description", CreatedBy = "rhomere" }
+                new Data.GovernmentFile
+                {
+                    FileId = "5122",
+                    Type = "Resolution",
+                    RequestingDepartment = " Department of FireRescue",
+                    Date = DateTime.Parse("12/11/2018"),
+                    CommissionMeetingDate = DateTime.Parse("01/10/2019"),
+                    MunicipalNumber = "01",
+                    Name = "Accept Supplemental Funding - FEMA and USAR",
+                    Subject = "Accept Supplemental Funding - FEMA and USAR",
+                    PurposeOfItem = "A Resolution of the City of Miami authorizing the City Manager to accept supplemental funding in the amount of $17,507.00, from the Department of " +
+                    "Homeland Security, Federal Emergency Management Agency (“FEMA”), for the FY 2017 Cooperative Agreement for the Florida Urban Search and Rescue(“USAR”) Task Force " +
+                    "thereby increasing Special Revenue Project “FY 2017 – Department of Homeland Security, Federal Emergency Management Agency(“FEMA”) – Urban Search and Rescue (“USAR”) " +
+                    "Readiness Cooperative Agreement” from $1, 202, 013.00, previously awarded under Resolution 17 - 0502, to $1, 219, 520.00",
+                    BackgroundItem = "The Department of Homeland Security has annually awarded a grant to the South Florida Urban Search and Rescue (“USAR”) Task Force 2, for the continued " +
+                    "operation of the City’s USAR Program.Said grant award for Fiscal Year 2017 is in an amount not to exceed $1, 202, 013.00, commencing September 1st, 2017 thru August " +
+                    "31st, 2020.At this time, FEMA is appropriating supplemental funds in the amount of $17, 507.00.It is now appropriate to accept said supplemental funding thereby " +
+                    "increasing the existing special revenue project, and appropriate funds in an amount not to exceed $17, 507.00, therein for said fiscal year.",
+                    BudgetImpactAnalysis = "Item is NOT Related to Revenue Item is NOT funded by Bonds",
+                    TotalFiscalImpact = "$ 17,507.00 Start Up Capital Cost:$17,507.00",
+                    CreatedBy = "rhomere"
+                }
             };
 
             var service = new GovernmentService();
