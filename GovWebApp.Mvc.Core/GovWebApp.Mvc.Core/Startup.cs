@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using GovWebApp.Mvc.Core.Models;
+using GovWebApp.Mvc.Core.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GovWebApp.Mvc.Core
 {
@@ -23,6 +26,8 @@ namespace GovWebApp.Mvc.Core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<GovContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GovContext")));
+
             services.AddControllersWithViews();
         }
 
