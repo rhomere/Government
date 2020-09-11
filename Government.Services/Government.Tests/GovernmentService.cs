@@ -55,11 +55,34 @@ namespace Government.Tests
             return GovRepo.GetGovFilesByMunicipalNumber(number);
         }
 
+        public List<GovernmentFile> GetGovernmentFilesByOfficialId(int id)
+        {
+            return GovRepo.GetGovernmentFilesByOfficialId(id);
+        }
+
+        public void AddGovFilesTest(List<GovernmentFile> files)
+        {
+            GovRepo.AddGovFilesTest(files);
+        }
+
+        public void AddOfficialXGovFilesTest(List<OfficialXGovFile> files)
+        {
+            GovRepo.AddOfficialXGovFilesTest(files);
+        }
+
         public void DisplayText(string text)
         {
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine($"\n{text}\n");
+            Console.ResetColor();
+        }
+
+        public void DisplayTextWithoutBreaklines(string text)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine($"{text}");
             Console.ResetColor();
         }
     }

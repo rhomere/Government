@@ -4,11 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="688889d3eb2a471a9824755c21343c48" Name="Diagram1">
+      <Diagram DiagramId="688889d3eb2a471a9824755c21343c48" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="CityModel.Address" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CityModel.Municipal" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CityModel.Official" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CityModel.GovernmentFile" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CityModel.OfficialXGovFile" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CityModel.OfficialInfoXCity" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CityModel.Position" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CityModel.GovernmentFile" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

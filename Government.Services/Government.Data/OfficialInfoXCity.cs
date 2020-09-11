@@ -12,25 +12,18 @@ namespace Government.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class GovernmentFile
+    public partial class OfficialInfoXCity
     {
         public int Id { get; set; }
-        public string MunicipalNumber { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int PositionId { get; set; }
+        public int MunicipalId { get; set; }
+        public string TermLength { get; set; }
+        public string JobDescription { get; set; }
+        public string JobRequirement { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }
-        public string RequestingDepartment { get; set; }
-        public System.DateTime Date { get; set; }
-        public Nullable<System.DateTime> CommissionMeetingDate { get; set; }
-        public string PurposeOfItem { get; set; }
-        public string BackgroundItem { get; set; }
-        public string BudgetImpactAnalysis { get; set; }
-        public string TotalFiscalImpact { get; set; }
-        public string FileId { get; set; }
-        public string Subject { get; set; }
-        public string Type { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
